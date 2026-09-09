@@ -5,7 +5,6 @@ from .models import Course, Lesson, Question, Choice, Submission, Enrollment
 
 def submit(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
-    # Get user enrollment (assuming user is authenticated)
     enrollment = Enrollment.objects.filter(user=request.user, course=course).first()
     if not enrollment:
         enrollment = Enrollment.objects.create(user=request.user, course=course, mode='audit')
